@@ -1,0 +1,43 @@
+@use 'abstracts' as *;
+
+.container {
+	width: min(100% - 2 * var(--gutter), var(--container));
+	margin-inline: auto;
+}
+
+.sr-only {
+	@include visually-hidden;
+}
+
+.skip-link {
+	position: fixed;
+	top: var(--space-3);
+	left: var(--space-3);
+	z-index: 100;
+	padding: var(--space-2) var(--space-4);
+	border-radius: var(--radius-md);
+	background: var(--accent);
+	color: var(--accent-contrast);
+	font-weight: 600;
+	transform: translateY(-200%);
+
+	&:focus-visible {
+		transform: none;
+	}
+}
+
+@include motion-safe {
+	[data-reveal] {
+		opacity: 0;
+		transform: translateY(20px);
+		transition:
+			opacity 0.8s var(--ease-out),
+			transform 0.8s var(--ease-out);
+		transition-delay: var(--reveal-delay, 0ms);
+
+		&.is-visible {
+			opacity: 1;
+			transform: none;
+		}
+	}
+}

@@ -1,0 +1,105 @@
+@use 'abstracts' as *;
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2);
+	height: 46px;
+	padding-inline: var(--space-5);
+	border: 1px solid transparent;
+	border-radius: var(--radius-full);
+	font-size: var(--fs-sm);
+	font-weight: 600;
+	letter-spacing: -0.005em;
+	white-space: nowrap;
+	transition:
+		background-color var(--dur) ease,
+		border-color var(--dur) ease,
+		color var(--dur) ease,
+		transform var(--dur) var(--ease-out);
+
+	svg {
+		transition: transform var(--dur) var(--ease-out);
+	}
+
+	&:active {
+		transform: translateY(1px);
+	}
+
+	&--primary {
+		background: var(--accent);
+		color: var(--accent-contrast);
+
+		@include hover {
+			background: var(--accent-strong);
+
+			svg {
+				transform: translateX(3px);
+			}
+		}
+	}
+
+	&--ghost {
+		border-color: var(--border-strong);
+		color: var(--text);
+
+		@include hover {
+			border-color: var(--text-subtle);
+			background: var(--surface);
+		}
+	}
+
+	&--sm {
+		height: 38px;
+		padding-inline: var(--space-4);
+	}
+}
+
+.icon-btn {
+	display: inline-grid;
+	place-items: center;
+	width: 40px;
+	height: 40px;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-full);
+	color: var(--text-muted);
+	transition:
+		color var(--dur) ease,
+		border-color var(--dur) ease,
+		background-color var(--dur) ease;
+
+	@include hover {
+		color: var(--text);
+		border-color: var(--border-strong);
+		background: var(--surface);
+	}
+}
+
+.tag-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-2);
+	padding: 0;
+	list-style: none;
+}
+
+.tag {
+	display: inline-flex;
+	align-items: center;
+	height: 28px;
+	padding-inline: 11px;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-full);
+	background: var(--surface-2);
+	color: var(--text-muted);
+	font-family: var(--font-mono);
+	font-size: var(--fs-xs);
+	white-space: nowrap;
+
+	&--core {
+		border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+		background: var(--accent-soft);
+		color: var(--accent);
+	}
+}

@@ -1,0 +1,37 @@
+node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editores e ferramentas locais (só a recomendação de extensões do VS Code é versionada)
+.vscode/*
+!.vscode/extensions.json
+.idea
+.claude/
+
+# Nenhum PDF vai para o repositório (ex.: currículo com dados pessoais)
+*.pdf

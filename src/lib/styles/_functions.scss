@@ -1,0 +1,14 @@
+@use 'sass:math';
+
+$base-font-size: 16px !default;
+
+@function rem($px) {
+	@return math.div($px, $base-font-size) * 1rem;
+}
+
+@function fluid($min, $max, $min-vw: 360px, $max-vw: 1280px) {
+	$slope: math.div($max - $min, $max-vw - $min-vw);
+	$intercept: $min - $slope * $min-vw;
+
+	@return clamp(rem($min), rem($intercept) + $slope * 100vw, rem($max));
+}
