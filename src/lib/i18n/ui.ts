@@ -2,9 +2,9 @@ import type { Locale } from './locales.ts';
 
 const pt = {
 	meta: {
-		title: 'Victor Targino | Desenvolvedor Back-End .NET',
+		title: 'Victor Targino | Desenvolvedor Full-Stack com foco em back-end .NET',
 		description:
-			'Portfólio de Victor Targino, desenvolvedor back-end com foco em C#, .NET e SQL Server. APIs RESTful, modernização de sistemas legados e apps offline-first.'
+			'Portfólio de Victor Targino, desenvolvedor full-stack com foco em back-end: APIs com C#, .NET e SQL Server, e interfaces com SvelteKit e TypeScript.'
 	},
 	a11y: {
 		skip: 'Pular para o conteúdo',
@@ -19,7 +19,8 @@ const pt = {
 		sendEmail: 'Enviar e-mail',
 		technologies: 'Tecnologias',
 		focusAreas: 'Principais frentes de atuação',
-		apiCard: 'Resumo do perfil no formato de uma resposta JSON de API'
+		apiCard: 'Resumo do perfil no formato de uma resposta de API',
+		apiTabs: 'Formato da resposta'
 	},
 	hero: {
 		status: 'Disponível para novas oportunidades',
@@ -31,28 +32,28 @@ const pt = {
 		experience: {
 			endpoint: '/experiencia',
 			title: 'Experiência',
-			lede: 'Do legado ao moderno: sustentação de sistemas em produção, APIs novas e um app mobile offline-first.'
+			lede: 'Do legado ao moderno: sistemas em produção, APIs novas e as telas que consomem essas APIs.'
 		},
 		projects: {
 			endpoint: '/projetos',
 			title: 'Projetos',
-			lede: 'Projetos pessoais, do banco de dados ao deploy, onde também exploro outras stacks além do .NET.'
+			lede: 'Projetos no ar, para clientes e pessoais, do banco de dados ao deploy.'
 		},
 		stack: {
 			endpoint: '/stack',
 			title: 'Stack & competências',
-			lede: 'Ferramentas que uso no dia a dia. Em destaque, as que formam a base do meu trabalho.'
+			lede: 'Da interface ao banco de dados, com o peso no back-end. Em destaque, o que uso no dia a dia.'
 		},
 		education: { endpoint: '/formacao', title: 'Formação' },
 		contact: {
 			endpoint: '/contato',
 			title: 'Vamos conversar?',
-			lede: 'Estou em busca de novas oportunidades como desenvolvedor back-end .NET. Se tem uma vaga, um projeto ou só quer trocar uma ideia, me chama.'
+			lede: 'Estou em busca de novas oportunidades como desenvolvedor full-stack com foco em back-end .NET. Se tem uma vaga, um projeto ou só quer trocar uma ideia, me chama.'
 		}
 	},
 	projects: {
 		featured: 'Projeto em destaque',
-		visit: (name: string) => `Acessar o ${name}`,
+		visit: 'Acessar o site',
 		visitLabel: (name: string) => `Acessar ${name}`,
 		source: 'Código-fonte',
 		sourceLabel: (name: string) => `Código-fonte de ${name}`,
@@ -66,18 +67,33 @@ const pt = {
 		}
 	},
 	flashcard: {
-		deck: 'Baralho · Back-end .NET',
+		deck: 'Baralho · Dev web',
 		question: 'Pergunta',
 		answer: 'Resposta',
 		hint: 'clique para ver a resposta',
 		next: 'Próximo cartão →'
 	},
 	stack: {
-		core: 'tecnologias principais'
+		core: 'uso no dia a dia',
+		primary: 'foco principal'
+	},
+	api: {
+		tabs: { json: 'JSON', ui: 'Interface' },
+		keys: {
+			name: 'nome',
+			role: 'cargo',
+			focus: 'foco',
+			stack: 'stack',
+			experience: 'experiencia',
+			location: 'local',
+			available: 'disponivel'
+		},
+		available: 'Disponível',
+		focus: 'foco principal'
 	},
 	contact: {
 		copy: 'Copiar e-mail',
-		copied: 'Copiado!',
+		copied: 'Copiado',
 		call: (number: string) => `Ligar para ${number}`
 	},
 	footer: {
@@ -112,9 +128,9 @@ export type UiStrings = typeof pt;
 
 const en: UiStrings = {
 	meta: {
-		title: 'Victor Targino | Back-End .NET Developer',
+		title: 'Victor Targino | Full-Stack Developer, back-end .NET focus',
 		description:
-			'Portfolio of Victor Targino, a back-end developer focused on C#, .NET and SQL Server. RESTful APIs, legacy system modernization and offline-first apps.'
+			'Portfolio of Victor Targino, a full-stack developer with a back-end focus: APIs with C#, .NET and SQL Server, and interfaces with SvelteKit and TypeScript.'
 	},
 	a11y: {
 		skip: 'Skip to content',
@@ -129,7 +145,8 @@ const en: UiStrings = {
 		sendEmail: 'Send email',
 		technologies: 'Technologies',
 		focusAreas: 'Main focus areas',
-		apiCard: 'Profile summary formatted as a JSON API response'
+		apiCard: 'Profile summary formatted as an API response',
+		apiTabs: 'Response format'
 	},
 	hero: {
 		status: 'Open to new opportunities',
@@ -141,28 +158,28 @@ const en: UiStrings = {
 		experience: {
 			endpoint: '/experience',
 			title: 'Experience',
-			lede: 'From legacy to modern: keeping production systems running, building new APIs and an offline-first mobile app.'
+			lede: 'From legacy to modern: production systems, new APIs and the screens that consume them.'
 		},
 		projects: {
 			endpoint: '/projects',
 			title: 'Projects',
-			lede: 'Personal projects, from database to deployment, where I also explore stacks beyond .NET.'
+			lede: 'Live projects, for clients and for myself, from database to deployment.'
 		},
 		stack: {
 			endpoint: '/stack',
 			title: 'Stack & skills',
-			lede: 'Tools I use day to day. Highlighted are the ones at the core of my work.'
+			lede: 'From the interface down to the database, with the weight on the back end. Highlighted is what I use day to day.'
 		},
 		education: { endpoint: '/education', title: 'Education' },
 		contact: {
 			endpoint: '/contact',
 			title: "Let's talk",
-			lede: "I'm looking for new opportunities as a back-end .NET developer. Whether you have a role, a project or just want to chat, feel free to reach out."
+			lede: "I'm looking for new opportunities as a full-stack developer with a back-end .NET focus. Whether you have a role, a project or just want to chat, feel free to reach out."
 		}
 	},
 	projects: {
 		featured: 'Featured project',
-		visit: (name: string) => `Visit ${name}`,
+		visit: 'Visit the site',
 		visitLabel: (name: string) => `Visit ${name}`,
 		source: 'Source code',
 		sourceLabel: (name: string) => `Source code for ${name}`,
@@ -176,18 +193,33 @@ const en: UiStrings = {
 		}
 	},
 	flashcard: {
-		deck: 'Deck · .NET back-end',
+		deck: 'Deck · Web dev',
 		question: 'Question',
 		answer: 'Answer',
 		hint: 'click to reveal the answer',
 		next: 'Next card →'
 	},
 	stack: {
-		core: 'core technologies'
+		core: 'used day to day',
+		primary: 'main focus'
+	},
+	api: {
+		tabs: { json: 'JSON', ui: 'Interface' },
+		keys: {
+			name: 'name',
+			role: 'role',
+			focus: 'focus',
+			stack: 'stack',
+			experience: 'experience',
+			location: 'location',
+			available: 'available'
+		},
+		available: 'Available',
+		focus: 'main focus'
 	},
 	contact: {
 		copy: 'Copy email',
-		copied: 'Copied!',
+		copied: 'Copied',
 		call: (number: string) => `Call ${number}`
 	},
 	footer: {

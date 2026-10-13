@@ -13,7 +13,6 @@
 	<div class="container">
 		<SectionHeading
 			id="experiencia-title"
-			index={2}
 			endpoint={copy.endpoint}
 			title={copy.title}
 			lede={copy.lede}

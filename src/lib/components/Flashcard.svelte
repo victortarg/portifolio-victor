@@ -16,6 +16,13 @@
 			}
 		},
 		{
+			front: { pt: '$derived ou $effect no Svelte 5?', en: '$derived or $effect in Svelte 5?' },
+			back: {
+				pt: '$derived calcula um valor a partir de outro estado, sem efeitos colaterais. $effect serve para sincronizar com algo de fora, como o DOM ou uma biblioteca de terceiros.',
+				en: '$derived computes a value from other state, with no side effects. $effect is for syncing with something outside, like the DOM or a third-party library.'
+			}
+		},
+		{
 			front: {
 				pt: 'IQueryable ou IEnumerable no Entity Framework?',
 				en: 'IQueryable or IEnumerable in Entity Framework?'
@@ -58,19 +65,22 @@
 		<span>{index + 1}/{deck.length}</span>
 	</div>
 
-	<button type="button" class="card" class:flipped onclick={() => (flipped = !flipped)}>
-		<span class="inner">
-			<span class="face front" aria-hidden={flipped}>
-				<span class="label">{ui.question}</span>
-				<span class="text">{i18n.t(card.front)}</span>
-				<span class="hint">{ui.hint}</span>
+	<!-- Keyed so each new card is a fresh element that plays its entrance. -->
+	{#key index}
+		<button type="button" class="card" class:flipped onclick={() => (flipped = !flipped)}>
+			<span class="inner">
+				<span class="face front" aria-hidden={flipped}>
+					<span class="label">{ui.question}</span>
+					<span class="text">{i18n.t(card.front)}</span>
+					<span class="hint">{ui.hint}</span>
+				</span>
+				<span class="face back" aria-hidden={!flipped}>
+					<span class="label">{ui.answer}</span>
+					<span class="text">{i18n.t(card.back)}</span>
+				</span>
 			</span>
-			<span class="face back" aria-hidden={!flipped}>
-				<span class="label">{ui.answer}</span>
-				<span class="text">{i18n.t(card.back)}</span>
-			</span>
-		</span>
-	</button>
+		</button>
+	{/key}
 
 	<div class="controls">
 		<span class="dots" aria-hidden="true">
@@ -105,6 +115,22 @@
 		perspective: 1200px;
 		text-align: left;
 		border-radius: var(--radius-lg);
+		transition: opacity 250ms var(--ease-out);
+
+		@starting-style {
+			opacity: 0;
+		}
+
+		// The next card slides in from the right, where "next" lives.
+		@include motion-safe {
+			transition:
+				opacity 250ms var(--ease-out),
+				transform 250ms var(--ease-out);
+
+			@starting-style {
+				transform: translateX(12px);
+			}
+		}
 
 		&:focus-visible {
 			outline-offset: 6px;
@@ -211,7 +237,13 @@
 		padding: 4px 0;
 		color: var(--text-muted);
 		font: inherit;
-		transition: color var(--dur) ease;
+		transition:
+			color var(--dur) ease,
+			transform var(--dur-press) var(--ease-out);
+
+		&:active {
+			transform: scale(0.97);
+		}
 
 		@include hover {
 			color: var(--accent);

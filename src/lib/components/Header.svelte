@@ -12,6 +12,7 @@
 	let active = $state('');
 	let scrolled = $state(false);
 	let menuOpen = $state(false);
+	let sentinel: HTMLElement;
 
 	onMount(() => {
 		const observer = new IntersectionObserver(
@@ -28,13 +29,12 @@
 			if (el) observer.observe(el);
 		}
 
-		const onScroll = () => (scrolled = window.scrollY > 8);
-		onScroll();
-		window.addEventListener('scroll', onScroll, { passive: true });
+		const topObserver = new IntersectionObserver(([entry]) => (scrolled = !entry.isIntersecting));
+		topObserver.observe(sentinel);
 
 		return () => {
 			observer.disconnect();
-			window.removeEventListener('scroll', onScroll);
+			topObserver.disconnect();
 		};
 	});
 
@@ -44,6 +44,8 @@
 </script>
 
 <svelte:window onkeydown={onKeydown} />
+
+<div class="sentinel" bind:this={sentinel} aria-hidden="true"></div>
 
 <header class="header" class:scrolled={scrolled || menuOpen}>
 	<div class="container inner">
@@ -77,28 +79,47 @@
 				aria-label={menuOpen ? i18n.ui.a11y.closeMenu : i18n.ui.a11y.openMenu}
 				onclick={() => (menuOpen = !menuOpen)}
 			>
-				<Icon name={menuOpen ? 'close' : 'menu'} />
+				<span class="icon-swap" aria-hidden="true">
+					<span class:is-shown={!menuOpen}><Icon name="menu" /></span>
+					<span class:is-shown={menuOpen}><Icon name="close" /></span>
+				</span>
 			</button>
 		</div>
 	</div>
 
-	{#if menuOpen}
-		<nav id="mobile-menu" class="mobile-menu" aria-label={i18n.ui.a11y.sections}>
-			<ul role="list" class="container">
-				{#each sections as section, i (section.id)}
-					<li style="--i: {i}">
-						<a href="#{section.id}" onclick={() => (menuOpen = false)}>
-							<span class="num">0{i + 1}</span>
-							{i18n.t(section.label)}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</nav>
-	{/if}
+	<!-- Always rendered so closing can animate out; inert keeps it out of reach while closed. -->
+	<nav
+		id="mobile-menu"
+		class="mobile-menu"
+		class:open={menuOpen}
+		aria-label={i18n.ui.a11y.sections}
+		inert={!menuOpen}
+	>
+		<ul role="list" class="container">
+			{#each sections as section, i (section.id)}
+				<li style="--i: {i}">
+					<a href="#{section.id}" onclick={() => (menuOpen = false)}>
+						<span class="num">0{i + 1}</span>
+						{i18n.t(section.label)}
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</nav>
 </header>
 
 <style lang="scss">
+	// Sits at the very top of the page: once it leaves the viewport, the
+	// header gets its solid background.
+	.sentinel {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 1px;
+		height: 8px;
+		pointer-events: none;
+	}
+
 	.header {
 		position: fixed;
 		inset: 0 0 auto;
@@ -208,8 +229,33 @@
 	}
 
 	.mobile-menu {
-		border-top: 1px solid var(--border);
+		position: absolute;
+		inset: 100% 0 auto;
+		border-block: 1px solid var(--border);
 		background: var(--bg);
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			opacity 150ms var(--ease-out),
+			visibility 0s linear 150ms;
+
+		@include motion-safe {
+			transform: translateY(-4px);
+			transition:
+				opacity 150ms var(--ease-out),
+				transform 150ms var(--ease-out),
+				visibility 0s linear 150ms;
+		}
+
+		&.open {
+			visibility: visible;
+			opacity: 1;
+			transform: none;
+			transition:
+				opacity 200ms var(--ease-out),
+				transform 200ms var(--ease-out),
+				visibility 0s;
+		}
 
 		@include up(lg) {
 			display: none;
@@ -220,11 +266,24 @@
 			padding-block: var(--space-3) var(--space-5);
 		}
 
+		// Links cascade in on open; on close the whole panel fades as one.
 		li {
 			@include motion-safe {
-				animation: slide-in 0.35s var(--ease-out) both;
-				animation-delay: calc(var(--i) * 35ms);
+				opacity: 0;
+				transform: translateY(-6px);
+				transition:
+					opacity 150ms var(--ease-out),
+					transform 150ms var(--ease-out);
 			}
+		}
+
+		&.open li {
+			opacity: 1;
+			transform: none;
+			transition:
+				opacity 350ms var(--ease-out),
+				transform 350ms var(--ease-out);
+			transition-delay: calc(var(--i) * 35ms);
 		}
 
 		a {
@@ -241,13 +300,6 @@
 
 		.num {
 			@include mono-label;
-		}
-	}
-
-	@keyframes slide-in {
-		from {
-			opacity: 0;
-			transform: translateY(-6px);
 		}
 	}
 </style>

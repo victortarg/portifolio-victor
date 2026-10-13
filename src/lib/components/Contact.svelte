@@ -28,7 +28,6 @@
 		<div class="panel" use:reveal>
 			<SectionHeading
 				id="contato-title"
-				index={6}
 				method="POST"
 				endpoint={copy.endpoint}
 				title={copy.title}
@@ -41,7 +40,10 @@
 					<Icon name="arrowUpRight" size={28} strokeWidth={1.5} />
 				</a>
 				<button type="button" class="btn btn--ghost btn--sm copy" onclick={copyEmail}>
-					<Icon name={copied ? 'check' : 'copy'} size={15} />
+					<span class="icon-swap" aria-hidden="true">
+						<span class:is-shown={!copied}><Icon name="copy" size={15} /></span>
+						<span class:is-shown={copied}><Icon name="check" size={15} /></span>
+					</span>
 					<span aria-live="polite">{copied ? i18n.ui.contact.copied : i18n.ui.contact.copy}</span>
 				</button>
 			</div>

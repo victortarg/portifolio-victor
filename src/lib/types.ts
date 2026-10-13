@@ -7,6 +7,7 @@ export interface Profile {
 	name: string;
 	fullName: string;
 	role: Text;
+	focus: Text;
 	location: Text;
 	openToWork: boolean;
 	pitch: Text;
@@ -49,8 +50,10 @@ export interface Project {
 	description: Text;
 	highlights?: Localized<string[]>;
 	stack: Text[];
+	kind?: Text;
 	status?: Text;
 	featured?: boolean;
+	image?: { src: string; alt: Text; width: number; height: number };
 	links: {
 		demo?: string;
 		repo?: string;
@@ -61,6 +64,13 @@ export interface SkillGroup {
 	title: Text;
 	icon: IconName;
 	skills: { name: Text; core?: boolean }[];
+}
+
+export interface StackLayer extends SkillGroup {
+	description: Text;
+	primary?: boolean;
+	/** How this layer talks to the one above it in the stack diagram. */
+	link?: string;
 }
 
 export interface Education {

@@ -2,6 +2,50 @@ import type { Project } from '#lib/types.ts';
 
 export const projects: Project[] = [
 	{
+		slug: 'eis-me-aqui',
+		name: 'Camisas Eis-me Aqui',
+		tagline: {
+			pt: 'Catálogo online de uma loja de camisas católicas',
+			en: 'Online catalog for a Catholic t-shirt shop'
+		},
+		description: {
+			pt: 'Site de catálogo para uma loja de Fortaleza, com painel administrativo. Quem compra escolhe modelo, cor e tamanho de cada camisa, monta o pedido com quantas peças quiser e envia tudo pelo WhatsApp, com os itens e o total já calculados. A loja cuida do catálogo pelo painel, com os dados no Cloudflare D1 e as fotos no R2.',
+			en: 'A catalog website for a shop in Fortaleza, with an admin panel. Customers pick the model, color and size of each shirt, build an order with as many pieces as they want and send it over WhatsApp with the items and total already worked out. The shop manages its catalog through the panel, with data in Cloudflare D1 and photos in R2.'
+		},
+		highlights: {
+			pt: [
+				'Painel administrativo para cadastrar produtos e fotos',
+				'Dados no Cloudflare D1 e imagens no R2, servidas em WebP',
+				'Variações de modelo, cor e tamanho, com preço próprio por modelo',
+				'Pedido salvo no navegador e enviado pelo WhatsApp com itens e total',
+				'Catálogo renderizado no servidor, no ar em domínio próprio'
+			],
+			en: [
+				'Admin panel to manage products and photos',
+				'Data in Cloudflare D1 and images in R2, served as WebP',
+				'Model, color and size variants, with a price per model',
+				'Order saved in the browser and sent over WhatsApp with items and total',
+				'Server-rendered catalog, live on its own domain'
+			]
+		},
+		stack: ['SvelteKit', 'TypeScript', 'Cloudflare D1', 'Cloudflare R2'],
+		kind: { pt: 'Projeto para cliente', en: 'Client project' },
+		status: 'Online',
+		featured: true,
+		image: {
+			src: '/projects/eis-me-aqui.webp',
+			alt: {
+				pt: 'Catálogo do site Camisas Eis-me Aqui, com o título Nossas camisas e fotos das camisas Sagrado coração de Maria, Santa Teresinha e São Bento',
+				en: 'The Camisas Eis-me Aqui catalog page, with the heading Nossas camisas and photos of three shirts'
+			},
+			width: 1280,
+			height: 800
+		},
+		links: {
+			demo: 'https://camisaseismeaqui.com.br'
+		}
+	},
+	{
 		slug: 'reviz',
 		name: 'Reviz',
 		tagline: {
@@ -27,6 +71,7 @@ export const projects: Project[] = [
 			]
 		},
 		stack: ['Svelte', 'JavaScript', 'Tailwind CSS', 'Supabase', 'Vercel'],
+		kind: { pt: 'Projeto pessoal', en: 'Personal project' },
 		status: 'Online',
 		featured: true,
 		links: {

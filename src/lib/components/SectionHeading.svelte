@@ -3,19 +3,17 @@
 
 	interface Props {
 		id: string;
-		index: number;
 		method?: 'GET' | 'POST';
 		endpoint: string;
 		title: string;
 		lede?: string;
 	}
 
-	let { id, index, method = 'GET', endpoint, title, lede }: Props = $props();
+	let { id, method = 'GET', endpoint, title, lede }: Props = $props();
 </script>
 
 <header class="heading" use:reveal>
 	<p class="endpoint" aria-hidden="true">
-		<span class="index">{String(index).padStart(2, '0')}</span>
 		<span class="method" class:post={method === 'POST'}>{method}</span>
 		<span>{endpoint}</span>
 	</p>
@@ -36,23 +34,9 @@
 	.endpoint {
 		display: flex;
 		align-items: center;
-		gap: var(--space-3);
+		gap: var(--space-2);
 		@include mono-label;
 		font-size: var(--fs-sm);
-	}
-
-	.index {
-		color: var(--text-subtle);
-
-		&::after {
-			content: '';
-			display: inline-block;
-			width: 28px;
-			height: 1px;
-			margin-left: var(--space-3);
-			vertical-align: middle;
-			background: var(--border-strong);
-		}
 	}
 
 	.method {

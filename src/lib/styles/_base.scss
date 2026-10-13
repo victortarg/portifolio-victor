@@ -94,6 +94,27 @@ pre {
 	@include focus-ring;
 }
 
+// Theme switch (see ThemeToggle.svelte): freeze transitions while the
+// View Transition snapshots the page, then reveal the new theme.
+:root[data-theme-switch] {
+	*,
+	*::before,
+	*::after {
+		transition: none !important;
+	}
+}
+
+:root[data-theme-switch='circle']::view-transition-old(root),
+:root[data-theme-switch='circle']::view-transition-new(root) {
+	animation: none;
+	mix-blend-mode: normal;
+}
+
+:root[data-theme-switch='fade']::view-transition-old(root),
+:root[data-theme-switch='fade']::view-transition-new(root) {
+	animation-duration: 200ms;
+}
+
 ::selection {
 	background: var(--accent);
 	color: var(--accent-contrast);

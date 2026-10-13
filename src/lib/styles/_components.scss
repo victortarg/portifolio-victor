@@ -17,14 +17,14 @@
 		background-color var(--dur) ease,
 		border-color var(--dur) ease,
 		color var(--dur) ease,
-		transform var(--dur) var(--ease-out);
+		transform var(--dur-press) var(--ease-out);
 
 	svg {
 		transition: transform var(--dur) var(--ease-out);
 	}
 
 	&:active {
-		transform: translateY(1px);
+		transform: scale(0.97);
 	}
 
 	&--primary {
@@ -67,12 +67,48 @@
 	transition:
 		color var(--dur) ease,
 		border-color var(--dur) ease,
-		background-color var(--dur) ease;
+		background-color var(--dur) ease,
+		transform var(--dur-press) var(--ease-out);
 
 	@include hover {
 		color: var(--text);
 		border-color: var(--border-strong);
 		background: var(--surface);
+	}
+
+	&:active {
+		transform: scale(0.95);
+	}
+}
+
+// Two icons in the same spot that crossfade when the state changes
+// (copy to check, menu to close). Mark the visible one with .is-shown.
+.icon-swap {
+	display: grid;
+
+	> * {
+		display: grid;
+		grid-area: 1 / 1;
+		opacity: 0;
+		transition: opacity 200ms var(--ease-out);
+
+		@include motion-safe {
+			transform: scale(0.25);
+			filter: blur(4px);
+			transition:
+				opacity 200ms var(--ease-out),
+				transform 200ms var(--ease-out),
+				filter 200ms var(--ease-out);
+		}
+	}
+
+	> .is-shown {
+		opacity: 1;
+
+		@include motion-safe {
+			transform: none;
+			filter: none;
+		}
 	}
 }
 

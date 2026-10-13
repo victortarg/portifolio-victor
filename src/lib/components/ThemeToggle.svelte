@@ -19,12 +19,51 @@
 					: 'light';
 	});
 
-	function toggle() {
-		theme = theme === 'dark' ? 'light' : 'dark';
-		document.documentElement.dataset.theme = theme;
+	function apply(next: Theme) {
+		theme = next;
+		document.documentElement.dataset.theme = next;
 		try {
-			localStorage.setItem('theme', theme);
+			localStorage.setItem('theme', next);
 		} catch {}
+	}
+
+	// The new theme spreads out in a circle from the button. Without View
+	// Transitions it switches instantly; with reduced motion it crossfades.
+	function toggle(event: MouseEvent) {
+		const next: Theme = theme === 'dark' ? 'light' : 'dark';
+		const root = document.documentElement;
+
+		if (!('startViewTransition' in document)) {
+			apply(next);
+			return;
+		}
+
+		const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const button = (event.currentTarget as HTMLElement).getBoundingClientRect();
+		const x = button.left + button.width / 2;
+		const y = button.top + button.height / 2;
+		const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+		// Pauses every CSS color transition so both snapshots are clean.
+		root.dataset.themeSwitch = reduce ? 'fade' : 'circle';
+		const transition = document.startViewTransition(() => apply(next));
+
+		if (!reduce) {
+			transition.ready.then(() => {
+				root.animate(
+					{
+						clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`]
+					},
+					{
+						duration: 500,
+						easing: getComputedStyle(root).getPropertyValue('--ease-in-out'),
+						pseudoElement: '::view-transition-new(root)'
+					}
+				);
+			});
+		}
+
+		transition.finished.finally(() => delete root.dataset.themeSwitch);
 	}
 </script>
 

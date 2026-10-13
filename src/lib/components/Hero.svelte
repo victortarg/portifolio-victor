@@ -24,7 +24,7 @@
 
 			<p class="role" style="--d: 2">
 				{i18n.t(profile.role)}
-				<span class="stack">C# · .NET · ASP.NET Core · SQL Server</span>
+				<span class="focus">{i18n.t(profile.focus)}</span>
 			</p>
 
 			<p class="pitch" style="--d: 3">{i18n.t(profile.pitch)}</p>
@@ -71,10 +71,6 @@
 						<Icon name="mail" />
 					</a>
 				</li>
-				<li class="location">
-					<Icon name="mapPin" size={16} />
-					{i18n.t(profile.location)}
-				</li>
 			</ul>
 		</div>
 
@@ -99,7 +95,7 @@
 	.hero {
 		position: relative;
 		isolation: isolate;
-		padding-top: calc(var(--header-h) + fluid(48px, 112px));
+		padding-top: calc(var(--header-h) + fluid(40px, 80px));
 		padding-bottom: var(--space-4);
 		overflow: hidden;
 
@@ -206,14 +202,9 @@
 		letter-spacing: -0.015em;
 	}
 
-	.stack {
+	.focus {
 		display: block;
-		margin-top: var(--space-2);
 		color: var(--accent);
-		font-family: var(--font-mono);
-		font-size: var(--fs-sm);
-		font-weight: 500;
-		letter-spacing: 0;
 	}
 
 	.pitch {
@@ -238,15 +229,6 @@
 		margin-top: var(--space-6);
 	}
 
-	.location {
-		display: inline-flex;
-		align-items: center;
-		gap: 6px;
-		margin-left: var(--space-2);
-		color: var(--text-subtle);
-		font-size: var(--fs-sm);
-	}
-
 	.card {
 		@include up(lg) {
 			transform: perspective(1400px) rotateY(-4deg) rotateX(2deg);
@@ -255,18 +237,25 @@
 
 	.stats {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		margin-top: fluid(56px, 96px);
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--space-5);
+		margin-top: fluid(56px, 88px);
+		padding-top: var(--space-5);
 		border-top: 1px solid var(--border);
+
+		@include up(lg) {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 0;
+		}
 	}
 
 	.stat {
 		display: flex;
 		flex-direction: column-reverse;
+		justify-content: flex-end;
 		gap: 2px;
-		padding-block: var(--space-5) 0;
 
-		@include up(md) {
+		@include up(lg) {
 			padding-inline: var(--space-5);
 
 			& + & {

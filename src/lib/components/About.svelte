@@ -11,7 +11,7 @@
 
 <section id="sobre" class="section" aria-labelledby="sobre-title">
 	<div class="container">
-		<SectionHeading id="sobre-title" index={1} endpoint={copy.endpoint} title={copy.title} />
+		<SectionHeading id="sobre-title" endpoint={copy.endpoint} title={copy.title} />
 
 		<div class="layout">
 			<div class="text" use:reveal>
@@ -22,9 +22,11 @@
 
 			<ul class="focus" role="list" aria-label={i18n.ui.a11y.focusAreas}>
 				{#each focusAreas as area, i (i)}
-					<li class="focus-card" use:reveal={{ delay: i * 70 }}>
-						<span class="icon"><Icon name={area.icon} size={20} /></span>
-						<h3>{i18n.t(area.title)}</h3>
+					<li class="focus-item" use:reveal={{ delay: i * 70 }}>
+						<div class="focus-head">
+							<span class="icon"><Icon name={area.icon} size={18} /></span>
+							<h3>{i18n.t(area.title)}</h3>
+						</div>
 						<p>{i18n.t(area.description)}</p>
 					</li>
 				{/each}
@@ -62,26 +64,38 @@
 
 	.focus {
 		display: grid;
-		gap: var(--space-4);
+		gap: var(--space-6);
+		align-content: start;
 
 		@include up(sm) {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 	}
 
-	.focus-card {
-		@include card;
+	.focus-item {
+		position: relative;
 		display: grid;
 		gap: var(--space-3);
 		align-content: start;
-		padding: var(--space-5);
-		transition:
-			border-color var(--dur) ease,
-			transform 0.35s var(--ease-out);
+		padding-top: var(--space-5);
+		border-top: 1px solid var(--border);
+
+		// Accent line that draws over the hairline on hover.
+		&::before {
+			content: '';
+			position: absolute;
+			inset: -1px 0 auto;
+			height: 1px;
+			background: var(--accent);
+			transform: scaleX(0);
+			transform-origin: left;
+			transition: transform 0.45s var(--ease-out);
+		}
 
 		@include hover {
-			border-color: var(--border-strong);
-			transform: translateY(-3px);
+			&::before {
+				transform: scaleX(1);
+			}
 
 			.icon {
 				background: var(--accent);
@@ -90,7 +104,6 @@
 		}
 
 		h3 {
-			margin-top: var(--space-2);
 			font-size: var(--fs-lg);
 			font-weight: 600;
 		}
@@ -102,11 +115,18 @@
 		}
 	}
 
+	.focus-head {
+		display: flex;
+		gap: var(--space-3);
+		align-items: center;
+	}
+
 	.icon {
 		display: grid;
+		flex-shrink: 0;
 		place-items: center;
-		width: 40px;
-		height: 40px;
+		width: 36px;
+		height: 36px;
 		border-radius: var(--radius-md);
 		background: var(--accent-soft);
 		color: var(--accent);

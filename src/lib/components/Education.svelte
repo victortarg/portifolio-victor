@@ -11,7 +11,7 @@
 
 <section id="formacao" class="section" aria-labelledby="formacao-title">
 	<div class="container">
-		<SectionHeading id="formacao-title" index={5} endpoint={copy.endpoint} title={copy.title} />
+		<SectionHeading id="formacao-title" endpoint={copy.endpoint} title={copy.title} />
 
 		<ul class="grid" role="list">
 			{#each education as item, i (item.institution)}

@@ -48,7 +48,7 @@
 					hreflang={meta.htmlLang}
 					lang={meta.htmlLang}
 					aria-current={code === i18n.locale ? 'true' : undefined}
-					data-sveltekit-noscroll
+					data-sveltekit-reset="false"
 					onclick={() => close()}
 				>
 					<span class="badge">{meta.short}</span>
@@ -79,12 +79,17 @@
 		transition:
 			color var(--dur) ease,
 			border-color var(--dur) ease,
-			background-color var(--dur) ease;
+			background-color var(--dur) ease,
+			transform var(--dur-press) var(--ease-out);
 
 		@include hover {
 			color: var(--text);
 			border-color: var(--border-strong);
 			background: var(--surface);
+		}
+
+		&:active {
+			transform: scale(0.97);
 		}
 
 		&[aria-expanded='true'] {
