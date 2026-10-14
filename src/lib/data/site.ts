@@ -1,7 +1,7 @@
 import type { Localized } from '#lib/i18n/locales.ts';
 
 export const site = {
-	url: 'https://victortargino.vercel.app'
+	url: 'https://victortargino.com.br'
 };
 
 export const sections: { id: string; label: Localized }[] = [
