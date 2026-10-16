@@ -2,6 +2,60 @@ import type { Project } from '#lib/types.ts';
 
 export const projects: Project[] = [
 	{
+		slug: 'stv-importados',
+		name: 'STV Importados',
+		tagline: {
+			pt: 'Catálogo online de uma loja de produtos importados dos EUA',
+			en: 'Online catalog for a store selling products imported from the US'
+		},
+		description: {
+			pt: 'Nova versão do site de uma loja de Fortaleza que vende produtos originais dos Estados Unidos, pensada para ser o link da bio do Instagram. O cliente navega pelas categorias, busca por produto ou marca, monta a sacola e fecha o pedido pelo WhatsApp. A loja cuida de produtos, categorias e textos num painel protegido pelo Cloudflare Access, e as páginas saem prontas do servidor, com SEO e prévia de link para cada produto.',
+			en: 'A new version of the website for a Fortaleza store that sells original products from the United States, built to be its Instagram bio link. Customers browse the categories, search by product or brand, fill a bag and close the order over WhatsApp. The store manages products, categories and texts in a panel protected by Cloudflare Access, and pages are server-rendered with SEO and a link preview for every product.'
+		},
+		highlights: {
+			pt: [
+				'Painel administrativo com login pelo Cloudflare Access',
+				'Produtos, categorias e textos da loja editáveis no painel',
+				'Busca por produto ou marca e página própria para cada produto',
+				'Sacola salva no navegador e enviada pelo WhatsApp com itens e total',
+				'SEO com sitemap, dados estruturados e prévia de link por produto',
+				'Catálogo de reserva para o site nunca abrir vazio, coberto por testes'
+			],
+			en: [
+				'Admin panel with sign-in through Cloudflare Access',
+				'Products, categories and store texts editable in the panel',
+				'Search by product or brand, and a page of its own for every product',
+				'Bag saved in the browser and sent over WhatsApp with items and total',
+				'SEO with a sitemap, structured data and a link preview per product',
+				'Fallback catalog so the site never opens empty, covered by tests'
+			]
+		},
+		stack: [
+			'SvelteKit',
+			'TypeScript',
+			'SCSS',
+			'Cloudflare Workers',
+			'Cloudflare D1',
+			'Cloudflare R2',
+			'Vitest'
+		],
+		kind: { pt: 'Projeto para cliente', en: 'Client project' },
+		status: 'Online',
+		featured: true,
+		image: {
+			src: '/projects/stv-importados.webp',
+			alt: {
+				pt: 'Página inicial da STV Importados, com o título Importados originais, escolhidos para você, a busca de produtos e uma fileira de suplementos com preços',
+				en: 'The STV Importados home page, with the heading Importados originais, escolhidos para você, a product search box and a row of supplements with prices'
+			},
+			width: 1280,
+			height: 800
+		},
+		links: {
+			demo: 'https://stvimportados.vtal.workers.dev'
+		}
+	},
+	{
 		slug: 'eis-me-aqui',
 		name: 'Camisas Eis-me Aqui',
 		tagline: {
